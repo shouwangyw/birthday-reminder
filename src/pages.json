@@ -1,0 +1,35 @@
+{
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationBarTitleText": "生日提醒",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/add/add",
+      "style": {
+        "navigationBarTitleText": "添加生日"
+      }
+    },
+    {
+      "path": "pages/detail/detail",
+      "style": {
+        "navigationBarTitleText": "生日详情"
+      }
+    },
+    {
+      "path": "pages/settings/settings",
+      "style": {
+        "navigationBarTitleText": "设置"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "生日提醒",
+    "navigationBarBackgroundColor": "#FF6B6B",
+    "backgroundColor": "#FFF7F0"
+  }
+}
