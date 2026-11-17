@@ -35,7 +35,15 @@
         >{{ s }}</text>
       </view>
 
-      <text class="blessing-text">{{ currentBlessing }}</text>
+      <textarea
+        class="blessing-input"
+        v-model="blessingText"
+        :maxlength="500"
+        auto-height
+        placeholder="祝福语可编辑，支持微信等输入法的表情"
+      />
+      <text class="blessing-hint">👆 点上方文字即可编辑，可加表情</text>
+
       <text class="emoji-pack">{{ emojis }}</text>
 
       <view class="actions">
@@ -89,6 +97,7 @@ export default {
       record: null,
       next: {},
       emojis: '',
+      blessingText: '',
       blessingList: [],
       styleFilter: '全部',
       currentIndex: 0,
@@ -134,18 +143,23 @@ export default {
       this.blessingList = generateBlessingList(record, new Date())
       this.emojis = generateEmojis(record)
       this.currentIndex = 0
+      this.blessingText = this.currentBlessing
     },
     setStyle(s) {
       this.styleFilter = s
       this.currentIndex = 0
+      this.blessingText = this.currentBlessing
     },
     nextBlessing() {
       const len = this.filtered.length
-      if (len) this.currentIndex = (this.currentIndex + 1) % len
+      if (len) {
+        this.currentIndex = (this.currentIndex + 1) % len
+        this.blessingText = this.currentBlessing
+      }
     },
     copyBlessing() {
       uni.setClipboardData({
-        data: this.currentBlessing,
+        data: this.blessingText,
         success: () => uni.showToast({ title: '已复制', icon: 'success' })
       })
     },
@@ -291,11 +305,22 @@ export default {
   color: #fff;
   background: #ff6b6b;
 }
-.blessing-text {
+.blessing-input {
+  width: 100%;
+  min-height: 220rpx;
   font-size: 30rpx;
   line-height: 1.7;
   color: #3b3030;
-  white-space: pre-wrap;
+  background: #fff8f6;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+.blessing-hint {
+  display: block;
+  font-size: 22rpx;
+  color: #b6a8a8;
+  margin-top: 10rpx;
 }
 .emoji-pack {
   display: block;

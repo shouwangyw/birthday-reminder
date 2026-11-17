@@ -95,7 +95,7 @@ function buildBlessing(record, now, style, seed) {
   const next = computeNextBirthday(record, now)
   const relation = record.appellation || '朋友'
   const rel = RELATION_MAP[relation] || { salutation: relation ? '亲爱的' + relation : '亲爱的朋友', emoji: ['🎂', '🎉', '🎁'] }
-  const zodiac = next.zodiac
+  const zodiac = next.yearZodiac
   const age = next.age >= 0 ? next.age : null
 
   let wish
@@ -140,3 +140,4 @@ export function generateBlessingList(record, now) {
 }
 
 export const BLESSING_STYLES = ['全部', '温馨', '幽默', '正式']
+

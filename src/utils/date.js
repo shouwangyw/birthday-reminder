@@ -69,6 +69,10 @@ export function getZodiac(record) {
   return solarLunar.getAnimal(res.cYear, res.cMonth, res.cDay)
 }
 
+export function getYearZodiac(year) {
+  return solarLunar.getAnimal(year)
+}
+
 export function formatLunarMonthDay(m, d, isLeap) {
   const mm = solarLunar.toChinaMonth(m)
   const dd = solarLunar.toChinaDay(d)
@@ -106,6 +110,7 @@ export function computeNextBirthday(record, from) {
     daysLeft,
     age,
     zodiac: getZodiac(record),
+    yearZodiac: result ? getYearZodiac(result.date.getFullYear()) : '',
     isToday: daysLeft === 0,
     birthdayText: formatBirthday(record)
   }
@@ -118,3 +123,4 @@ export function todayBirthdayRecords(records) {
     return n.isToday
   })
 }
+
